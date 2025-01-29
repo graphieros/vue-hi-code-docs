@@ -4,6 +4,8 @@ import { useMainStore } from '@/stores/main';
 import { computed, ref } from 'vue';
 import { VueHiCode } from "vue-hi-code";
 import { VueUiIcon } from "vue-data-ui";
+// @ts-ignore
+import ConfirmCopy from "@/components/ConfirmCopy.vue";
 import "vue-hi-code/style.css";
 
 const store = useMainStore();
@@ -93,6 +95,7 @@ const config = computed(() => {
             language="javascript"
             v-bind="config"
             copy-icon-color="#559AD3"
+            @copy="store.copy()"
           />
         </div>
       </div>
@@ -105,6 +108,7 @@ const config = computed(() => {
             title="1. Import the component in the script tag"
             v-bind="config"
             copy-icon-color="#CD9077"
+            @copy="store.copy()"
           />
         </div>
   
@@ -115,6 +119,7 @@ const config = computed(() => {
             title="2. Setup the props"
             v-bind="config"
             copy-icon-color="#CD9077"
+            @copy="store.copy()"
           />
         </div>
   
@@ -125,6 +130,7 @@ const config = computed(() => {
             title="3. Template usage"
             v-bind="config"
             copy-icon-color="#CD9077"
+            @copy="store.copy()"
           />
         </div>
       </div>
@@ -166,5 +172,7 @@ const config = computed(() => {
     </div>
     <div class="flex flex-row justify-center gap-1">All charts are composed with <a href="https://vue-data-ui.graphieros.com/" class="underline" target="_blank" :style="{ color: isDarkMode ? '#CD9077' : '#1A1A1A' }">Vue Data UI</a></div>
   </footer>
+
+  <ConfirmCopy />
 
 </template>
