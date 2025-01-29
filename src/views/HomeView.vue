@@ -43,6 +43,7 @@ const availableProps = ref([
   ['language', '"javascript" | "css" | "html"', 'yes', '-'],
   ['title', 'string', 'no', '-'],
   ['withLineNumbers', 'boolean', 'no', 'false'],
+  ['lineHeight', 'string', 'no', '1.4rem'],
   ['colorLineNumber', 'string', 'no', ' #8A8A8A'],
   ['withCopy', 'boolean', 'no', 'true'],
   ['copyIconColor', 'string', 'no', '#CCCCCC'],
@@ -67,7 +68,7 @@ const availableProps = ref([
   ['colorBrackets', 'string', 'no', '#559AD3'],
   ['colorComment', 'string', 'no', '#8A8A8A'],
   ['colorHtmlTag', 'string', 'no', '#559AD3'],
-  ['colorCssSelector', 'string', 'no', '#D7BA7D']
+  ['colorCssSelector', 'string', 'no', '#D7BA7D'],
 ]);
 
 const config = computed(() => {
