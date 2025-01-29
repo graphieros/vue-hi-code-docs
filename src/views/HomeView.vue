@@ -87,7 +87,7 @@ const config = computed(() => {
         <h1 class="text-[34px] leading-12 text-center lg:text-right" :style="{ maxWidth: '22ch'}">
           A light Vue 3 <span :style="{ color: isDarkMode ? '#559AD3' : '#559AD3' }">code highlighter</span> component to display<br> <span :style="{ color: isDarkMode ? '#CD9077' : '#CD9077' }">JS, CSS and HTML</span> snippets
         </h1>
-        <div class="w-full max-w-[230px]">
+        <div class="w-full max-w-[220px]">
           <VueHiCode
             :content="installContent"
             language="javascript"
