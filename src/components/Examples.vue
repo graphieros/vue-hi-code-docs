@@ -5,6 +5,7 @@ import { VueHiCode } from "vue-hi-code";
 
 const store = useMainStore();
 const isDarkMode = computed(() => store.isDarkMode);
+const isMobile = computed(() => store.screenWidth < 800);
 
 const config = computed(() => {
     return {
@@ -12,7 +13,10 @@ const config = computed(() => {
         baseTextColor: isDarkMode.value ? '#CCCCCC' : '#3A3A3A',
         colorTitle: isDarkMode.value ? '#CCCCCC' : '#3A3A3A',
         colorFunction: isDarkMode.value ? '#DCDCAA' : '#A0A000',
-        colorPunctuation: isDarkMode.value ? '#E1E5E8' : '#3A3A3A'
+        colorPunctuation: isDarkMode.value ? '#E1E5E8' : '#3A3A3A',
+        withCopy: false,
+        fontSize: isMobile.value ? '0.8rem' : '1rem',
+        lineHeight: isMobile.value ? '1.2rem' : '1.4rem'
     }
 })
 

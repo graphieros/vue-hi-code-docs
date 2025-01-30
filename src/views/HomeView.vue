@@ -9,9 +9,15 @@ import ConfirmCopy from "@/components/ConfirmCopy.vue";
 import "vue-hi-code/style.css";
 // @ts-ignore
 import Examples from '@/components/Examples.vue';
+import { onMounted } from 'vue';
+import { onBeforeUnmount } from 'vue';
+// @ts-ignore
+import colorBridge from "color-bridge";
 
 const store = useMainStore();
 const isDarkMode = computed(() => store.isDarkMode);
+const { utils } = colorBridge();
+const { textColorForBackground } = utils(); 
 
 const installContent = ref(`npm i vue-hi-code`);
 const setupContent = ref(`import { VueHiCode } from "vue-hi-code";
@@ -46,9 +52,9 @@ const availableProps = ref([
   ['title', 'string', 'no', '-'],
   ['withLineNumbers', 'boolean', 'no', 'false'],
   ['lineHeight', 'string', 'no', '1.4rem'],
-  ['colorLineNumber', 'string', 'no', ' #8A8A8A'],
+  ['colorLineNumber', 'string', 'no', ' #8A8A8A', textColorForBackground('#E46962')],
   ['withCopy', 'boolean', 'no', 'true'],
-  ['copyIconColor', 'string', 'no', '#CCCCCC'],
+  ['copyIconColor', 'string', 'no', '#CCCCCC', textColorForBackground('#CCCCCC')],
   ['copyIconSize', 'number', 'no', '20'],
   ['copyIconStrokeWidth', 'number', 'no', '1.5'],
   ['borderRadius', 'string', 'no', '0.3rem'],
@@ -57,21 +63,21 @@ const availableProps = ref([
   ['fontSize', 'string', 'no', '1rem'],
   ['titleFontSize', 'string', 'no', '1rem'],
   ['titleFontFamily', 'string', 'no', 'Verdana, sans-serif'],
-  ['colorTitle', 'string', 'no', '#E1E5E8'],
-  ['backgroundColor', 'string', 'no', '#2A2A2A'],
-  ['baseTextColor', 'string', 'no', '#CCCCCC'],
-  ['colorKeywords', 'string', 'no', '#B37BAE'],
-  ['colorVariableKeyword', 'string', 'no', '#559AD3'],
-  ['colorFunction', 'string', 'no', '#DCDCAA'],
-  ['colorNumber', 'string', 'no', '#AEC6A1'],
-  ['colorString', 'string', 'no', '#CD9077'],
-  ['colorParenthesis', 'string', 'no', '#8A8A8A'],
-  ['colorPunctuation', 'string', 'no', '#E1E5E8'],
-  ['colorBrackets', 'string', 'no', '#559AD3'],
-  ['colorComment', 'string', 'no', '#8A8A8A'],
-  ['colorHtmlTag', 'string', 'no', '#559AD3'],
-  ['colorCssSelector', 'string', 'no', '#D7BA7D'],
-  ['colorError', 'string', 'no', '#E46962'],
+  ['colorTitle', 'string', 'no', '#E1E5E8', textColorForBackground('#E1E5E8')],
+  ['backgroundColor', 'string', 'no', '#2A2A2A', textColorForBackground('#2A2A2A')],
+  ['baseTextColor', 'string', 'no', '#CCCCCC', textColorForBackground('#CCCCCC')],
+  ['colorKeywords', 'string', 'no', '#B37BAE', textColorForBackground('#B37BAE')],
+  ['colorVariableKeyword', 'string', 'no', '#559AD3', textColorForBackground('#559AD3')],
+  ['colorFunction', 'string', 'no', '#DCDCAA', textColorForBackground('#DCDCAA')],
+  ['colorNumber', 'string', 'no', '#AEC6A1', textColorForBackground('#AEC6A1')],
+  ['colorString', 'string', 'no', '#CD9077', textColorForBackground('#CD9077')],
+  ['colorParenthesis', 'string', 'no', '#8A8A8A', textColorForBackground('#8A8A8A')],
+  ['colorPunctuation', 'string', 'no', '#E1E5E8', textColorForBackground('#E1E5E8')],
+  ['colorBrackets', 'string', 'no', '#559AD3', textColorForBackground('#559AD3')],
+  ['colorComment', 'string', 'no', '#8A8A8A', textColorForBackground('#8A8A8A')],
+  ['colorHtmlTag', 'string', 'no', '#559AD3', textColorForBackground('#559AD3')],
+  ['colorCssSelector', 'string', 'no', '#D7BA7D', textColorForBackground('#D7BA7D')],
+  ['colorError', 'string', 'no', '#E46962', textColorForBackground('#E46962')],
 ]);
 
 const config = computed(() => {
@@ -80,15 +86,20 @@ const config = computed(() => {
     baseTextColor: isDarkMode.value ? '#CCCCCC' : '#3A3A3A',
     colorTitle: isDarkMode.value ? '#CCCCCC' : '#3A3A3A',
     colorFunction: isDarkMode.value ? '#DCDCAA' : '#A0A000',
-    colorPunctuation: isDarkMode.value ? '#E1E5E8' : '#3A3A3A'
+    colorPunctuation: isDarkMode.value ? '#E1E5E8' : '#3A3A3A',
+    fontSize: isMobile.value ? '0.8rem' : '1rem',
+    lineHeight: isMobile.value ? '1.2rem' : '1.4rem'
   }
-})
+});
+
+const screenWidth = computed(() => store.screenWidth);
+const isMobile = computed(() => screenWidth.value < 800);
 
 </script>
 
 <template>
   <main class="flex w-full justify-center py-18">
-    <div class="max-w-[1200px] flex flex-col place-items-center gap-12 px-5">
+    <div class="w-full max-w-[1200px] flex flex-col place-items-center gap-12 px-5">
       <div class="flex flex-col lg:flex-row gap-6 lg:gap-24 place-items-center">
         <h1 class="text-[34px] leading-12 text-center lg:text-right" :style="{ maxWidth: '22ch'}">
           A light Vue 3 <span :style="{ color: isDarkMode ? '#559AD3' : '#559AD3' }">code highlighter</span> component to display<br> <span :style="{ color: isDarkMode ? '#CD9077' : '#CD9077' }">JS, CSS and HTML</span> snippets
@@ -139,7 +150,19 @@ const config = computed(() => {
         </div>
       </div>
 
-      <table class="schema table-auto border-collapse border border-slate-500 w-full" :style="{
+      <div v-if="isMobile" class="flex flex-col gap-2">
+        <h2>Available props</h2>
+        <div v-for="p in availableProps" class="rounded shadow flex flex-col p-4" :style="{
+          background: isDarkMode ? '#2A2A2A' : '#FAFAFA'
+        }">
+          <span class="flex flex-row gap-2"><span>Name:</span> <code :style="{ color: isDarkMode ? '#559AD3' : '#1A1A1A'}">{{ p[0] }}</code></span>
+          <span class="flex flex-row gap-2"><span>Type:</span> <code>{{ p[1] }}</code></span>
+          <span class="flex flex-row gap-2"><span>Required:</span> <code>{{ p[2] }}</code></span>
+          <span class="flex flex-row gap-2"><span>Default:</span><div v-if="p[3].includes('#')" :style="{ background: p[3], height: '24px', color: p[4] }" class="rounded-full px-2 shadow"><code>{{ p[3] }}</code></div><code v-else>{{ p[3] }}</code></span>
+        </div>
+      </div>
+
+      <table v-else class="schema table-auto border-collapse border border-slate-500 w-full" :style="{
         background: isDarkMode ? '#2A2A2A' : '#FAFAFA'
       }">
         <caption class="caption-top py-4 text-left">
@@ -156,12 +179,14 @@ const config = computed(() => {
             </thead>
             <tbody>
                 <tr class="bg-[#FFFFFF60] dark:bg-[#FFFFFF10]" v-for="tr in availableProps">
-                    <td class="p-2 border border-slate-600 text-right" v-for="td in tr">
+                  <template v-for="(td, i) in tr">
+                    <td v-if="i < 4" class="p-2 border border-slate-600 text-right" >
                       <div class="flex flex-row gap-2 justify-end">
                         <code>{{ td }}</code>
                         <div v-if="td.includes('#')" :style="{ background: td, height: '24px', width:'24px' }" class="rounded-full"/>
                       </div>
                     </td>
+                  </template>
                 </tr>
             </tbody>
       </table>

@@ -6,6 +6,7 @@ export const useMainStore = defineStore('main', () => {
     const isCopy = ref(false);
     const downloads = ref([]);
     const stars = ref(0);
+    const screenWidth = ref(0);
 
     function copy() {
         isCopy.value = true;
@@ -19,6 +20,7 @@ export const useMainStore = defineStore('main', () => {
         isCopy,
         copy,
         downloads,
-        stars
+        stars,
+        screenWidth
     }
 })

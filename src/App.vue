@@ -5,6 +5,7 @@ import { computed, onMounted } from 'vue';
 import { VueUiIcon } from 'vue-data-ui';
 import pack from "../package.json"
 import { BrandGithubFilledIcon, MoonIcon, StarFilledIcon, SunIcon } from 'vue-tabler-icons';
+import { onBeforeUnmount } from 'vue';
 
 const store = useMainStore();
 
@@ -31,6 +32,19 @@ function changeTheme() {
         store.isDarkMode = true;
     }
 }
+
+function resize() {
+  store.screenWidth = window.innerWidth;
+}
+
+onMounted(() => {
+  store.screenWidth = window.innerWidth;
+  window.addEventListener('resize', resize)
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', resize);
+})
 
 </script>
 
