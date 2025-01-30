@@ -7,6 +7,8 @@ import { VueUiIcon } from "vue-data-ui";
 // @ts-ignore
 import ConfirmCopy from "@/components/ConfirmCopy.vue";
 import "vue-hi-code/style.css";
+// @ts-ignore
+import Examples from '@/components/Examples.vue';
 
 const store = useMainStore();
 const isDarkMode = computed(() => store.isDarkMode);
@@ -40,7 +42,7 @@ const templateContent = ref(`<template>
 
 const availableProps = ref([
   ['content', 'string', 'yes', '-'],
-  ['language', '"javascript" | "css" | "html"', 'yes', '-'],
+  ['language', '"javascript" | "css" | "html" | "error"', 'yes', '-'],
   ['title', 'string', 'no', '-'],
   ['withLineNumbers', 'boolean', 'no', 'false'],
   ['lineHeight', 'string', 'no', '1.4rem'],
@@ -69,6 +71,7 @@ const availableProps = ref([
   ['colorComment', 'string', 'no', '#8A8A8A'],
   ['colorHtmlTag', 'string', 'no', '#559AD3'],
   ['colorCssSelector', 'string', 'no', '#D7BA7D'],
+  ['colorError', 'string', 'no', '#E46962'],
 ]);
 
 const config = computed(() => {
@@ -162,6 +165,8 @@ const config = computed(() => {
                 </tr>
             </tbody>
       </table>
+
+      <Examples />
     </div>
   </main>
 

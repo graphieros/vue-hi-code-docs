@@ -17,7 +17,7 @@
     "tailwindcss": "^4.0.0",
     "vue": "^3.5.13",
     "vue-data-ui": "^2.4.90",
-    "vue-hi-code": "^1.1.2",
+    "vue-hi-code": "^1.2.0",
     "vue-router": "^4.5.0",
     "vue-tabler-icons": "^2.21.0"
   },
