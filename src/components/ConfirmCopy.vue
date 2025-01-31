@@ -10,7 +10,7 @@ const isCopy = computed(() => store.isCopy);
 
 <template>
     <div style="z-index:10000000" v-if="isCopy" class="animate-ping origin-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col place-items-center gap-2 rounded-full">    
-        <div style="z-index:10000000" v-if="isCopy" class="animate-pulse h-[100px] w-[100px] flex place-items-center place-content-center ">
+        <div style="z-index:10000000" v-if="isCopy" class="animate-pulse h-[100px] w-[100px] flex place-items-center place-content-center">
             <VueUiIcon name="copyLeft" :size="100" stroke="#CD9077"/>
         </div>
     </div>
