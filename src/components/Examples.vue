@@ -85,6 +85,7 @@ const example_html = `<html>
         <title>My First HTML Page</title>
     </head>
     <body>
+        <!-- This is a comment -->
         <h1>My First HTML Page</h1>
         <p> Hello World!</p>
     </body>
