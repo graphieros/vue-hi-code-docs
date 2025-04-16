@@ -102,7 +102,7 @@ const isMobile = computed(() => screenWidth.value < 800);
     <div class="w-full max-w-[1200px] flex flex-col place-items-center gap-12 px-5">
       <div class="flex flex-col lg:flex-row gap-6 lg:gap-24 place-items-center">
         <h1 class="text-[34px] lg:text-[48px] leading-12 lg:leading-16 text-center lg:text-right" :style="{ maxWidth: '22ch'}">
-          A light Vue 3 <span :style="{ color: isDarkMode ? '#559AD3' : '#559AD3' }">code highlighter</span> component to display<br> <span :style="{ color: isDarkMode ? '#CD9077' : '#CD9077' }">JS, CSS and HTML</span> snippets
+          A light Vue 3 <span class="text-[#559AD3]">code highlighter</span> component to display<br> <span :style="{ color: isDarkMode ? '#CD9077' : '#CD9077' }">JS, CSS and HTML</span> snippets
         </h1>
         <div class="w-full max-w-[220px]">
           <VueHiCode

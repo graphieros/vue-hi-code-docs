@@ -107,7 +107,7 @@ onMounted(() => {
         })
         .finally(() => step.value += 1);
 
-    fetch(`https://api.github.com/repos/graphieros/color-bridge`)
+    fetch(`https://api.github.com/repos/graphieros/vue-hi-code`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
