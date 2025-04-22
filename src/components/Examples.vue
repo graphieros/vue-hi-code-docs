@@ -103,8 +103,17 @@ const example_error = `TypeError: Cannot read properties of undefined (reading '
     at gs.G [as fn] (index-8FEo4Yvg.js:14:28877)
     at gs.run (index-8FEo4Yvg.js:10:1808)`;
 
+const example_ts = `type MyType = {
+      attr1: 'str',
+      attr2: 99
+}
+
+const arr: Array<Omit<MyType, 'attr1'>> = [{ attr2: 120 }];
+`
+
 const examples = ref([
     { content: example_js, language: 'javascript', title: 'JS - with language="javascript"' },
+    { content: example_ts, language: 'typescript', title: 'TS - with language="typescript"' },
     { content: example_css, language: 'css', title: 'CSS - with language="css"' },
     { content: example_html, language: 'html', title: 'HTML - with language="html"' },
     { content: example_error, language: 'error', title: 'ERROR - with language="error"' },
