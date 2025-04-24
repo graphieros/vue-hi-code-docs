@@ -128,6 +128,7 @@ const examples = ref([
             v-for="example in examples"
             v-bind="{ ...example, ...config }"
             style="margin: 1rem 0"
+            showIcon
         />
     </div>
 </template>

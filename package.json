@@ -18,7 +18,7 @@
     "tailwindcss": "^4.0.0",
     "vue": "^3.5.13",
     "vue-data-ui": "^2.6.0",
-    "vue-hi-code": "^1.3.2",
+    "vue-hi-code": "^1.4.0",
     "vue-router": "^4.5.0",
     "vue-tabler-icons": "^2.21.0"
   },
@@ -30,7 +30,7 @@
     "npm-run-all2": "^7.0.2",
     "ssh2": "^1.16.0",
     "typescript": "~5.7.3",
-    "vite": "^6.0.11",
+    "vite": "^6.2.6",
     "vite-plugin-vue-devtools": "^7.7.0",
     "vue-tsc": "^2.2.0"
   }

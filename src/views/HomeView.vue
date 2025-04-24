@@ -78,6 +78,7 @@ const availableProps = ref([
   ['colorHtmlTag', 'string', 'no', '#559AD3', textColorForBackground('#559AD3')],
   ['colorCssSelector', 'string', 'no', '#D7BA7D', textColorForBackground('#D7BA7D')],
   ['colorError', 'string', 'no', '#E46962', textColorForBackground('#E46962')],
+  ['showIcon', 'boolean', 'no', 'false']
 ]);
 
 const config = computed(() => {
@@ -88,7 +89,7 @@ const config = computed(() => {
     colorFunction: isDarkMode.value ? '#DCDCAA' : '#A0A000',
     colorPunctuation: isDarkMode.value ? '#E1E5E8' : '#3A3A3A',
     fontSize: isMobile.value ? '0.8rem' : '1rem',
-    lineHeight: isMobile.value ? '1.2rem' : '1.4rem'
+    lineHeight: isMobile.value ? '1.2rem' : '1.4rem',
   }
 });
 
@@ -124,6 +125,7 @@ const isMobile = computed(() => screenWidth.value < 800);
             v-bind="config"
             copy-icon-color="#CD9077"
             @copy="store.copy()"
+            showIcon
           />
         </div>
   
@@ -133,6 +135,7 @@ const isMobile = computed(() => screenWidth.value < 800);
             language="javascript"
             title="2. Setup the props"
             v-bind="config"
+            showIcon
             copy-icon-color="#CD9077"
             @copy="store.copy()"
           />
@@ -146,6 +149,7 @@ const isMobile = computed(() => screenWidth.value < 800);
             v-bind="config"
             copy-icon-color="#CD9077"
             @copy="store.copy()"
+            showIcon
           />
         </div>
       </div>
