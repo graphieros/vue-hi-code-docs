@@ -74,6 +74,7 @@ const availableProps = ref([
   ['colorParenthesis', 'string', 'no', '#8A8A8A', textColorForBackground('#8A8A8A')],
   ['colorPunctuation', 'string', 'no', '#E1E5E8', textColorForBackground('#E1E5E8')],
   ['colorBrackets', 'string', 'no', '#559AD3', textColorForBackground('#559AD3')],
+  ['colorCurlyBrackets', 'string', 'no', '#8A8A8A', textColorForBackground('#8A8A8A')],
   ['colorComment', 'string', 'no', '#8A8A8A', textColorForBackground('#8A8A8A')],
   ['colorHtmlTag', 'string', 'no', '#559AD3', textColorForBackground('#559AD3')],
   ['colorCssSelector', 'string', 'no', '#D7BA7D', textColorForBackground('#D7BA7D')],
