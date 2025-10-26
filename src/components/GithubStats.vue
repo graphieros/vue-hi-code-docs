@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useMainStore } from "@/stores/main";
 import { ref, computed, onMounted } from "vue";
-import { VueDataUi } from "vue-data-ui";
+import { VueUiSparkline } from "vue-data-ui/vue-ui-sparkline";
 
 const data = ref(null);
 const store = useMainStore();
@@ -129,6 +129,6 @@ onMounted(() => {
         width: '400px',
         margin: '0 auto',
     }">
-        <VueDataUi v-if="data" component="VueUiSparkline" :dataset="data" :config="config" :key="step" />
+        <VueUiSparkline v-if="data" :dataset="data" :config="config" :key="step" />
     </div>
 </template>
