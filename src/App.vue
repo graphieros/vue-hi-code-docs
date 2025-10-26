@@ -77,6 +77,5 @@ onBeforeUnmount(() => {
       </div>
     </div>
   </header>
-
   <RouterView />
 </template>

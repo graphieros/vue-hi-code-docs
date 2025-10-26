@@ -13,6 +13,7 @@ import { onMounted } from 'vue';
 import { onBeforeUnmount } from 'vue';
 // @ts-ignore
 import colorBridge from "color-bridge";
+import BubbleInput from '@/components/BubbleInput.vue';
 
 const store = useMainStore();
 const isDarkMode = computed(() => store.isDarkMode);
@@ -96,6 +97,8 @@ const config = computed(() => {
 
 const screenWidth = computed(() => store.screenWidth);
 const isMobile = computed(() => screenWidth.value < 800);
+
+const text = ref('')
 
 </script>
 
@@ -199,6 +202,14 @@ const isMobile = computed(() => screenWidth.value < 800);
       <Examples />
     </div>
   </main>
+
+  <!-- <BubbleInput 
+    v-model="text" 
+    isTextarea 
+    color="#6A6A6A"
+    label="Some label"
+    rainbow
+  /> -->
 
   <footer class="w-full py-12 flex flex-col">
     <GithubStats />
