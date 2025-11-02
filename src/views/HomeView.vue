@@ -3,7 +3,7 @@ import GithubStats from '@/components/GithubStats.vue';
 import { useMainStore } from '@/stores/main';
 import { computed, ref } from 'vue';
 import { VueHiCode } from "vue-hi-code";
-import { VueUiIcon } from "vue-data-ui";
+import { VueUiIcon } from "vue-data-ui/vue-ui-icon";
 // @ts-ignore
 import ConfirmCopy from "@/components/ConfirmCopy.vue";
 import "vue-hi-code/style.css";
@@ -13,7 +13,7 @@ import { onMounted } from 'vue';
 import { onBeforeUnmount } from 'vue';
 // @ts-ignore
 import colorBridge from "color-bridge";
-import BubbleInput from '@/components/BubbleInput.vue';
+// import BubbleInput from '@/components/BubbleInput.vue';
 
 const store = useMainStore();
 const isDarkMode = computed(() => store.isDarkMode);
@@ -48,39 +48,41 @@ const templateContent = ref(`<template>
 `);
 
 const availableProps = ref([
-  ['content', 'string', 'yes', '-'],
-  ['language', '"javascript" | "css" | "html" | "error"', 'yes', '-'],
-  ['title', 'string', 'no', '-'],
-  ['withLineNumbers', 'boolean', 'no', 'false'],
-  ['lineHeight', 'string', 'no', '1.4rem'],
+  ['content', 'string', 'yes', '""'],
+  ['backgroundColor', 'string', 'no', '#2A2A2A', textColorForBackground('#2A2A2A')],
+  ['baseTextColor', 'string', 'no', '#CCCCCC', textColorForBackground('#CCCCCC')],
+  ['borderRadius', 'string', 'no', '0.3rem'],
+  ['colorBrackets', 'string', 'no', '#559AD3', textColorForBackground('#559AD3')],
+  ['colorComment', 'string', 'no', '#8A8A8A', textColorForBackground('#8A8A8A')],
+  ['colorCssSelector', 'string', 'no', '#D7BA7D', textColorForBackground('#D7BA7D')],
+  ['colorCurlyBrackets', 'string', 'no', '#8A8A8A', textColorForBackground('#8A8A8A')],
+  ['colorError', 'string', 'no', '#E46962', textColorForBackground('#E46962')],
+  ['colorFunction', 'string', 'no', '#DCDCAA', textColorForBackground('#DCDCAA')],
+  ['colorHtmlTag', 'string', 'no', '#559AD3', textColorForBackground('#559AD3')],
+  ['colorKeywords', 'string', 'no', '#B37BAE', textColorForBackground('#B37BAE')],
   ['colorLineNumber', 'string', 'no', ' #8A8A8A', textColorForBackground('#E46962')],
-  ['withCopy', 'boolean', 'no', 'true'],
+  ['colorNumber', 'string', 'no', '#AEC6A1', textColorForBackground('#AEC6A1')],
+  ['colorParenthesis', 'string', 'no', '#8A8A8A', textColorForBackground('#8A8A8A')],
+  ['colorPunctuation', 'string', 'no', '#E1E5E8', textColorForBackground('#E1E5E8')],
+  ['colorSpecial', 'string', 'no', '#559AD3', textColorForBackground('#559AD3')],
+  ['colorString', 'string', 'no', '#CD9077', textColorForBackground('#CD9077')],
+  ['colorTitle', 'string', 'no', '#E1E5E8', textColorForBackground('#E1E5E8')],
+  ['colorVariableKeyword', 'string', 'no', '#559AD3', textColorForBackground('#559AD3')],
   ['copyIconColor', 'string', 'no', '#CCCCCC', textColorForBackground('#CCCCCC')],
   ['copyIconSize', 'number', 'no', '20'],
   ['copyIconStrokeWidth', 'number', 'no', '1.5'],
-  ['borderRadius', 'string', 'no', '0.3rem'],
-  ['padding', 'string', 'no', '1rem'],
   ['fontFamily', 'string', 'no', "'Fira Code', monospace"],
   ['fontSize', 'string', 'no', '1rem'],
-  ['titleFontSize', 'string', 'no', '1rem'],
+  ['language', '"javascript" | "css" | "html" | "error"', 'yes', '""'],
+  ['lineHeight', 'string', 'no', '1.4rem'],
+  ['padding', 'string', 'no', '1rem'],
+  ['showIcon', 'boolean', 'no', 'false'],
+  ['title', 'string', 'no', '""'],
   ['titleFontFamily', 'string', 'no', 'Verdana, sans-serif'],
-  ['colorTitle', 'string', 'no', '#E1E5E8', textColorForBackground('#E1E5E8')],
-  ['backgroundColor', 'string', 'no', '#2A2A2A', textColorForBackground('#2A2A2A')],
-  ['baseTextColor', 'string', 'no', '#CCCCCC', textColorForBackground('#CCCCCC')],
-  ['colorKeywords', 'string', 'no', '#B37BAE', textColorForBackground('#B37BAE')],
-  ['colorVariableKeyword', 'string', 'no', '#559AD3', textColorForBackground('#559AD3')],
-  ['colorFunction', 'string', 'no', '#DCDCAA', textColorForBackground('#DCDCAA')],
-  ['colorNumber', 'string', 'no', '#AEC6A1', textColorForBackground('#AEC6A1')],
-  ['colorString', 'string', 'no', '#CD9077', textColorForBackground('#CD9077')],
-  ['colorParenthesis', 'string', 'no', '#8A8A8A', textColorForBackground('#8A8A8A')],
-  ['colorPunctuation', 'string', 'no', '#E1E5E8', textColorForBackground('#E1E5E8')],
-  ['colorBrackets', 'string', 'no', '#559AD3', textColorForBackground('#559AD3')],
-  ['colorCurlyBrackets', 'string', 'no', '#8A8A8A', textColorForBackground('#8A8A8A')],
-  ['colorComment', 'string', 'no', '#8A8A8A', textColorForBackground('#8A8A8A')],
-  ['colorHtmlTag', 'string', 'no', '#559AD3', textColorForBackground('#559AD3')],
-  ['colorCssSelector', 'string', 'no', '#D7BA7D', textColorForBackground('#D7BA7D')],
-  ['colorError', 'string', 'no', '#E46962', textColorForBackground('#E46962')],
-  ['showIcon', 'boolean', 'no', 'false']
+  ['titleFontSize', 'string', 'no', '1rem'],
+  ['tsTypesCustom', 'string[]', 'no', '[]'],
+  ['withCopy', 'boolean', 'no', 'true'],
+  ['withLineNumbers', 'boolean', 'no', 'false'],
 ]);
 
 const config = computed(() => {

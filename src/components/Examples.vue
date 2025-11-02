@@ -16,7 +16,8 @@ const config = computed(() => {
         colorPunctuation: isDarkMode.value ? '#E1E5E8' : '#3A3A3A',
         withCopy: false,
         fontSize: isMobile.value ? '0.8rem' : '1rem',
-        lineHeight: isMobile.value ? '1.2rem' : '1.4rem'
+        lineHeight: isMobile.value ? '1.2rem' : '1.4rem',
+        tsTypesCustom: ['MyType']
     }
 })
 
