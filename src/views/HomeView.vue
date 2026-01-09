@@ -213,13 +213,15 @@ const text = ref('')
     rainbow
   /> -->
 
-  <footer class="w-full py-12 flex flex-col">
-    <GithubStats />
+  <footer class="w-full py-12 flex flex-col place-items-center">
+    <div class="w-full x-[300px] sm:w-[500px]">
+      <GithubStats/>
+    </div>
     <div class="flex flex-row gap-2 place-items-center justify-center pt-6">
       <VueUiIcon name="copyLeft" :stroke="isDarkMode ? '#CD9077' : '#1A1A1A'"/>
       <span><span style="font-weight:bold">vue-hi-code</span> {{ new Date().getFullYear() }}</span>
     </div>
-    <div class="flex flex-row justify-center gap-1">All charts are composed with <a href="https://vue-data-ui.graphieros.com/" class="underline" target="_blank" :style="{ color: isDarkMode ? '#CD9077' : '#1A1A1A' }">Vue Data UI</a></div>
+    <div class="flex flex-row justify-center gap-1">The chart is composed with <a href="https://vue-data-ui.graphieros.com/" class="underline" target="_blank" :style="{ color: isDarkMode ? '#CD9077' : '#1A1A1A' }">Vue Data UI</a></div>
   </footer>
 
   <ConfirmCopy />

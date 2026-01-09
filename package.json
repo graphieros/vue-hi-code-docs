@@ -14,24 +14,24 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.16",
     "color-bridge": "^2.1.0",
-    "pinia": "^2.3.1",
-    "tailwindcss": "^4.1.16",
-    "vue": "^3.5.22",
-    "vue-data-ui": "^3.5.2",
+    "pinia": "^3.0.4",
+    "tailwindcss": "^4.1.18",
+    "vue": "^3.5.26",
+    "vue-data-ui": "^3.10.5",
     "vue-hi-code": "^1.5.4",
-    "vue-router": "^4.5.0",
+    "vue-router": "^4.6.4",
     "vue-tabler-icons": "^2.21.0"
   },
   "devDependencies": {
     "@tsconfig/node22": "^22.0.0",
     "@types/node": "^22.10.7",
-    "@vitejs/plugin-vue": "^6.0.1",
+    "@vitejs/plugin-vue": "^6.0.3",
     "@vue/tsconfig": "^0.7.0",
     "npm-run-all2": "^7.0.2",
     "ssh2": "^1.16.0",
     "typescript": "~5.7.3",
-    "vite": "^7.1.12",
-    "vite-plugin-vue-devtools": "^7.7.0",
+    "vite": "^7.3.1",
+    "vite-plugin-vue-devtools": "^8.0.5",
     "vue-tsc": "^2.2.0"
   }
 }

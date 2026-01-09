@@ -1,71 +1,32 @@
-<script setup lang="ts">
+<script setup>
+import { ref, computed, onMounted, watch } from "vue";
+import { VueUiXy } from "vue-data-ui/vue-ui-xy";
+import { VueUiIcon } from "vue-data-ui/vue-ui-icon";
+import "vue-data-ui/style.css"
 import { useMainStore } from "@/stores/main";
-import { ref, computed, onMounted } from "vue";
-import { VueUiSparkline } from "vue-data-ui/vue-ui-sparkline";
 
-const data = ref(null);
+const step = ref(0);
+
+const data = ref([
+    {
+        name: 'Daily downloads',
+        series: [],
+        type: 'line',
+        useArea: true,
+        color: '#559AD3',
+        useTag: 'end'
+    }
+]);
+
+const xAxisLabels = ref([]);
+
 const store = useMainStore();
 const isDarkMode = computed(() => store.isDarkMode);
 
-const max = computed(() => {
-    // @ts-ignore
-    return data.value ? Math.max(...data.value.map(d => d.value)) : 0
-})
 
-const config = computed(() => {
-    return {
-        style: {
-            scaleMax: max.value,
-            backgroundColor: 'transparent',
-            fontFamily: "inherit",
-            chartWidth: 360,
-            line: {
-                color: '#559AD3',
-                strokeWidth: 1,
-                smooth: true
-            },
-            zeroLine: {
-                color: "#505050",
-                strokeWidth: 1
-            },
-            plot: {
-                show: true,
-                radius: 4,
-                stroke: "#FFFFFF",
-                strokeWidth: 1
-            },
-            verticalIndicator: {
-                show: true,
-                strokeWidth: 1.5,
-                color: '#A1A1A1'
-            },
-            dataLabel: {
-                position: "left",
-                fontSize: 48,
-                bold: true,
-                color: '#559AD3',
-                roundingValue: 1,
-                valueType: "latest"
-            },
-            title: {
-                show: true,
-                textAlign: "left",
-                color: isDarkMode.value ? '#CCCCCC' : '#1A1A1A',
-                fontSize: 16,
-                bold: true,
-                text: "Daily downloads - Last 90 days"
-            },
-            area: {
-                show: true,
-                useGradient: true,
-                opacity: 30,
-                color: '#559AD3'
-            }
-        }
-    }
+watch(() => isDarkMode.value, () => {
+    step.value += 1;
 })
-
-const step = ref(0);
 
 const start = ref("2025-01-27");
 const lastDate = ref(new Date(Date.now()));
@@ -77,58 +38,142 @@ const end = computed(() => {
     return `${year}-${String(month).length === 1 ? `0${month}` : month}-${String(day).length === 1 ? `0${day}` : day}`;
 });
 
-const url_downloads = computed(() => {
-    return `https://api.npmjs.org/downloads/range/${start.value}:${end.value}/vue-hi-code`;
+const url = computed(() => {
+    return `https://api.npmjs.org/downloads/range/${start.value}:${end.value}/vue-ui-code`;
 });
 
+const config = computed(() => {
+    return {
+        chart: {
+            padding: {
+                left: 24,
+            },
+            backgroundColor: isDarkMode.value ? '#1A1A1A' : '#FAFAFA',
+            color: isDarkMode.value ? '#CD9077' : '#1A1A1A',
+            grid: {
+                showHorizontalLines: false,
+                stroke: isDarkMode.value ? '#CD9077' : '#E1E5E8',
+                frame: {
+                    show: false,
+                    stroke: isDarkMode.value ? '#CD9077' : '#E1E5E8',
+                },
+                labels: {
+                    color: isDarkMode.value ? '#CD9077' : '#1A1A1A',
+                    fontSize: 24,
+                    xAxisLabels: {
+                        show: true,
+                        values: xAxisLabels.value,
+                        showOnlyAtModulo: 7,
+                        color: isDarkMode.value ? '#CD9077' : '#1A1A1A',
+                        fontSize: 20
+                    },
+                }
+            },
+            highlighter: {
+                color: isDarkMode.value ? '#CD9077' : '#1A1A1A',
+                useLine: true
+            },
+            legend: { show: false },
+            title: {
+                textAlign: 'left',
+                paddingLeft: 24,
+                color: isDarkMode.value ? '#559AD3' : '#1A1A1A',
+                text: 'Daily downloads',
+                subtitle: {
+                    text: 'Last 120 days',
+                    color: isDarkMode.value ? '#CD9077' : '#8A8A8A',
+                }
+            },
+            tooltip: { show: false },
+            userOptions: {
+                buttons: {
+                    labels: false,
+                    pdf: false,
+                    table: false,
+                }
+            },
+            zoom: {
+                highlightColor: '#559AD3',
+                color: isDarkMode.value ? '#CD9077' : '#1A1A1A',
+                focusOnDrag: true,
+                minimap: { 
+                    show: true,
+                    selectedColor: '#559AD3',
+                    indicatorColor: isDarkMode.value ? '#CD9077' : '#1A1A1A',
+                },
+                preview: {
+                    fill: '#CD907720',
+                    stroke: '#CD9077',
+                    strokeDasharray: 4
+                }
+            }
+        },
+        line: {
+            radius: 6,
+            useGradient: false,
+            dot: {
+                useSerieColor: false,
+                fill: '#1A1A1A',
+                strokeWidth: 3,
+            },
+            tag: {
+                followValue: true,
+                formatter: ({ value, config }) => {
+                    return `
+                        <div style="display:flex;align-items:center;gap:4px">
+                            <span style="font-variant-numeric: tabular-nums; display:flex;align-items:center;gap:4px;color: black">
+                                <span style="font-size: 10px;">
+                                    ${xAxisLabels.value[config.seriesIndex]}: 
+                                </span>
+                                <b>${value.toFixed(0)}</b>
+                            </span>
+                        </div>
+                    `
+                }
+            },
+        }
+    }
+})
 
 onMounted(() => {
-    fetch(url_downloads.value, {
+    fetch(url.value, {
         method: 'GET',
         mode: 'cors',
         cache: 'default'
     })
-        .then((response) => {
-            return response.json();
-        })
-        .then(json => {
-            store.downloads = json.downloads;
-            // @ts-ignore
-            data.value = json.downloads.map(d => {
-                return {
-                    period: d.day,
-                    value: d.downloads
-                }
-            }).slice(-90, -1);
-        })
-        .catch(err => {
-            // @ts-ignore
-            data.value = [{ period: "", value: 0 }]
-        })
-        .finally(() => step.value += 1);
+    .then((response) => {
+        return response.json();
+    })
+    .then(json => {
+        xAxisLabels.value = json.downloads.map(d => d.day).slice(-120, -1)
+        data.value[0].series = json.downloads.map(d => d.downloads).slice(-120, -1)
 
-    fetch(`https://api.github.com/repos/graphieros/vue-hi-code`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            store.stars = data.stargazers_count;
-        })
-        .catch(error => {
-            console.error('There was a problem fetching the data:', error);
-        })
+        console.log(data.value)
+    })
+    .catch(err => {
+        //
+    })
+    .finally(() => step.value += 1)
 })
 
 </script>
 
 <template>
-    <div :style="{
-        width: '400px',
-        margin: '0 auto',
-    }">
-        <VueUiSparkline v-if="data" :dataset="data" :config="config" :key="step" />
-    </div>
+    <VueUiXy :dataset="data" :config="config" :key="step">
+        <template #menuIcon="{ isOpen }">
+            <VueUiIcon :name="isOpen ? 'close' : 'knobs'" :stroke="isDarkMode ? '#CD9077' : '#1A1A1A'"/>    
+        </template>
+    </VueUiXy>
 </template>
+
+<style>
+.vue-data-ui-zoom {
+    max-width: 450px;
+    margin: 0 auto;
+    margin-top: 12px;
+}
+.vue-data-ui-refresh-button {
+    top: -8px !important;
+    left: calc(100% + 36px) !important;
+}
+</style>
