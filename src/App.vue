@@ -50,9 +50,9 @@ onBeforeUnmount(() => {
 
 <template>
   <header class="sticky top-0 left-0 py-2 card w-full flex justify-center shadow px-5 z-100">
-    <div class="w-full max-w-[1200px] flex flew-row place-items-center justify-between">
+    <div class="w-full max-w-300 flex flew-row place-items-center justify-between">
       <div class="text-2xl flex flex-row place-items-center gap-2">
-        <VueUiIcon name="numbers" :size="24" :stroke="isDarkMode ? '#AEC6A1' : '#AEC6A1'"/>
+        <VueUiIcon name="curlySpread" :size="24" :stroke="isDarkMode ? '#AEC6A1' : '#9A9A9A'"/>
         <span style="font-weight: bold" :style="{ color: isDarkMode ? '#559AD3' : '#3A3A3A' }">
           vue-hi-code
         </span>
@@ -66,10 +66,10 @@ onBeforeUnmount(() => {
         <button class="cursor-pointer relative">
           <a href="https://github.com/graphieros/vue-hi-code" target="_blank">
             <BrandGithubFilledIcon :style="{ color: isDarkMode ? '#CCCCCC' : '#1A1A1A'}"/>
-            <div class="absolute -top-3 left-[100%] flex flex-row text-right place-items-center tabular-nums gap-0.5">
+            <div class="absolute -top-3 left-full flex flex-row text-right place-items-center tabular-nums gap-0.5">
               <StarFilledIcon :size="12" class="text-orange-300"/>
               <span>
-                {{ store.stars || '++' }}
+                {{ store.stars || '' }}
               </span>
             </div>
           </a>

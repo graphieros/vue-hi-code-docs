@@ -106,17 +106,18 @@ const text = ref('')
 
 <template>
   <main class="flex w-full justify-center py-18">
-    <div class="w-full max-w-[1200px] flex flex-col place-items-center gap-12 px-5">
+    <div class="w-full max-w-300 flex flex-col place-items-center gap-12 px-5">
       <div class="flex flex-col lg:flex-row gap-6 lg:gap-24 place-items-center">
-        <h1 class="text-[34px] lg:text-[48px] leading-12 lg:leading-16 text-center lg:text-right" :style="{ maxWidth: '22ch'}">
-          A light Vue 3 <span class="text-[#559AD3]">code highlighter</span> component to display<br> <span :style="{ color: isDarkMode ? '#CD9077' : '#CD9077' }">JS, CSS and HTML</span> snippets
+        <h1 class="text-[34px] lg:text-[48px] leading-12 lg:leading-16 text-center lg:text-right" :style="{ textWrap: 'pretty'}">
+          A light Vue 3 <span class="text-[#559AD3]"><code class="bg-[#559AD320] px-2 rounded-md">code highlighter</code></span> component to display<br>  <span class="text-[#CD9077] bg-[#CD907720] px-2 rounded-md">JS, TS, CSS, HTML</span> snippets
         </h1>
-        <div class="w-full max-w-[220px]">
+        <div class="w-full max-w-55">
           <VueHiCode
             :content="installContent"
             language="javascript"
             v-bind="config"
             copy-icon-color="#559AD3"
+            :base-text-color="isDarkMode ? '#CD9077' : '#1A1A1A'"
             @copy="store.copy()"
           />
         </div>
