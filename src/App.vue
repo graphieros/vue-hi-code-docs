@@ -52,7 +52,7 @@ onBeforeUnmount(() => {
   <header class="sticky top-0 left-0 py-2 card w-full flex justify-center shadow px-5 z-100">
     <div class="w-full max-w-300 flex flew-row place-items-center justify-between">
       <div class="text-2xl flex flex-row place-items-center gap-2">
-        <VueUiIcon name="curlySpread" :size="24" :stroke="isDarkMode ? '#AEC6A1' : '#9A9A9A'"/>
+        <VueUiIcon name="binary" :size="24" :stroke="isDarkMode ? '#FFFFFF' : '#9A9A9A'"/>
         <span style="font-weight: bold" :style="{ color: isDarkMode ? '#559AD3' : '#3A3A3A' }">
           vue-hi-code
         </span>
