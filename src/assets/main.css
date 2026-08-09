@@ -1,28 +1,30 @@
 @import "tailwindcss";
-@import './base.css';
+@import "./base.css";
 
 #app {
   font-weight: normal;
 }
 
 html {
-  background: radial-gradient(at bottom right, #FAFAFA, #E1E5E8);
-  color: #1A1A1A;
-  transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+  background: #fafafa;
+  color: #1a1a1a;
+  transition:
+    background 0.2s ease-in-out,
+    color 0.2s ease-in-out;
 }
 
 html.dark {
-  background: #1A1A1A;
-  color: #CCCCCC;
+  background: #1a1a1a;
+  color: #cccccc;
 }
 
 .card {
   transition: background 0.2s ease-in-out;
-  background: #F3F4F6;
+  background: #f3f4f6;
 }
 
 html.dark .card {
-  background: #2A2A2A;
+  background: #2a2a2a;
 }
 
 h1 {
@@ -33,15 +35,15 @@ h1 span {
 }
 
 html h1 {
-  color: #4A4A4A;
+  color: #4a4a4a;
 }
 
 html.dark h1 {
-  color: #CCCCCC;
+  color: #cccccc;
 }
 
 html .code-parser {
-  background: #2A2A2A;
+  background: #2a2a2a;
 }
 
 html.dark .code-parser {
@@ -49,12 +51,12 @@ html.dark .code-parser {
 }
 
 html h2 {
-  background: linear-gradient(to right, #CCCCCC, transparent);
+  background: linear-gradient(to right, #cccccc, transparent);
   padding: 6px 12px;
   margin-bottom: 12px;
   border-radius: 20px;
 }
 
 html.dark h2 {
-  background: linear-gradient(to right, #FFFFFF20, transparent);
+  background: linear-gradient(to right, #ffffff20, transparent);
 }
